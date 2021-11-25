@@ -9,6 +9,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+// routes
+const posts = require("./routes/api/posts");
+app.use("/api/posts", posts);
+
 // handle production
 if (process.env.NODE_ENV === "production") {
   // static folder
@@ -19,10 +23,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(__dirname + "/public/index.html");
   });
 }
-
-// routes
-const posts = require("./routes/api/posts");
-app.use("/api/posts", posts);
 
 const port = process.env.PORT || 3000;
 
